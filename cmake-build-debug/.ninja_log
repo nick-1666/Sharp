@@ -1,0 +1,8 @@
+# ninja log v5
+2	104	6752961743632292	CMakeFiles/Sharp.dir/main.cpp.obj	72d9afc34ef46387
+106	259	6755448011071166	Sharp.exe	f169c2616ed763b1
+1	105	6755448009647332	CMakeFiles/Sharp.dir/main.c.obj	73cd6ac995c289de
+2	158	6753922162616970	CMakeFiles/Sharp.dir/stack.c.obj	c9a304f833f35ee9
+49	682	6753710325615134	CMakeFiles/Sharp.dir/arithmatic.c.obj	537ea624843f0554
+1	167	6755467652606436	build.ninja	11ba7ebc14101bad
+2	218	6755390505206776	CMakeFiles/Sharp.dir/math.c.obj	aab6be353d836d8e
