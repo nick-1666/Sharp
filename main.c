@@ -1,7 +1,8 @@
-#include <ctype.h>
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
+#include <malloc.h>
+#include <stdbool.h>
+#include <ctype.h>
 #include "stack.h"
 #include "math.h"
 
@@ -31,10 +32,10 @@ int main(int argc, const char * argv[])
 
     char *path = (char*)argv[1];
     if(!endsWithFileExt(path)) {
-        path = strncat_s(path, ".#\0", 3);
+        path = strncat(path, ".#\0", 3);
     }
 
-    if (argc != 2 || (fp = fopen_s(path, "r")) == NULL) {
+    if (argc != 2 || (fp = fopen(path, "r")) == NULL) {
 
         fprintf(stderr, "Usage: sharp.exe <filename>.#\n");
         exit(1);
@@ -122,13 +123,13 @@ int main(int argc, const char * argv[])
 
         if(cc == '.') {
             char ci;
-            scanf_s("%c", &ci);
+            scanf("%c", &ci);
             push(pt, (int)(ci-'0'));
         }
 
         if(cc == ':') {
             char ci;
-            scanf_s("%c", &ci);
+            scanf("%c", &ci);
             push(pt, ci);
         }
 
@@ -163,19 +164,19 @@ void setPosition(char cc) {
 
     position++;
 }
-int loopOpen(struct stack *pt, FILE *fp, char cc) {
+bool loopOpen(struct stack *pt, FILE *fp, char cc) {
     if(pop(pt) == 0) {
         do {
             cc = fgetc(fp);
             if(cc == '\n') lines++;
         }
         while (cc != ']');
-        return 1;
+        return true;
     }
-    return 0;
+    return false;
 }
 
-int endsWithFileExt(const char* s)
+bool endsWithFileExt(const char* s)
 {
     if (s != NULL)
     {
@@ -185,9 +186,9 @@ int endsWithFileExt(const char* s)
             s[size-2] == '.' &&
             s[size-1] == '#')
         {
-            return 1;
+            return true;
         }
     }
 
-    return 0;
+    return false;
 }

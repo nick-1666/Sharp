@@ -1,7 +1,6 @@
-#include <stdlib.h>
+#include <malloc.h>
 #include <stdio.h>
 #include "stack.h"
-
 void reverseArray(int arr[], int n);
 
 struct stack
