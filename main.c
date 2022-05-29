@@ -20,6 +20,7 @@ char *validSymbols = "#0123456789abcdef.:,;|[]=()+-*/%\n\t ";
 void setPosition(char cc);
 void pushHex(char cc);
 bool loopOpen(struct stack *pt, FILE *fp, char cc);
+bool endsWithFileExt(const char* s);
 
 int main(int argc, const char * argv[])
 {
@@ -29,7 +30,13 @@ int main(int argc, const char * argv[])
 
     size_t loop = 0;
 
-    if (argc != 2 || (fp = fopen(argv[1], "r")) == NULL) {
+    char *path = (char*)argv[1];
+    if(!endsWithFileExt(path)) {
+        path = strncat(path, ".#\0", 3);
+    }
+
+    if (argc != 2 || (fp = fopen(path, "r")) == NULL) {
+
         fprintf(stderr, "Usage: sharp.exe <filename>.#\n");
         exit(1);
     }
@@ -136,7 +143,7 @@ int main(int argc, const char * argv[])
         }
 
     }
-
+    if(loop != 0) { fprintf(stderr, "Unbalanced loops!"); exit(1); }
     fclose(fp);
 
     exit(0);
@@ -166,5 +173,22 @@ bool loopOpen(struct stack *pt, FILE *fp, char cc) {
         while (cc != ']');
         return true;
     }
+    return false;
+}
+
+bool endsWithFileExt(const char* s)
+{
+    if (s != NULL)
+    {
+        size_t size = strlen(s);
+
+        if (size >= 2 &&
+            s[size-2] == '.' &&
+            s[size-1] == '#')
+        {
+            return true;
+        }
+    }
+
     return false;
 }
