@@ -13,9 +13,9 @@ bool hexLiteral = false;
 char hexString[32] = "";
 
 char *arithmaticSymbols = "+-*/%";
-char *commandSymbols = ".:,;|[]=";
+char *commandSymbols = ".:,;|[]=^";
 char *hexSymbols = "0123456789abcdef-";
-char *validSymbols = "#0123456789abcdef.:,;|[]=()+-*/%\n\t ";
+char *validSymbols = "^#0123456789abcdef.:,;|[]=()+-*/%\n\t ";
 
 void setPosition(char cc);
 void pushHex(char cc);
@@ -120,6 +120,7 @@ int main(int argc, const char * argv[])
 
         if(cc == '|') { reverse(pt); continue; }
         if(cc == '=') { push(pt, peek(pt)); continue;}
+        if(cc == '^') { push(pt, size(pt)); continue;}
 
         if(cc == '.') {
             char ci;
