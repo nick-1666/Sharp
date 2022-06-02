@@ -15,7 +15,7 @@ void arithmatic(struct stack *pt, char cc) {
             return push(pt, x * y);
         case '/':
             if(x == 0 || y == 0) {
-                fprintf(stderr, "Usage: sharp.exe <filename>\n");
+                fprintf(stderr, "Cannot divide by 0!\n");
                 exit(1);
             }
             return push(pt, x / y);

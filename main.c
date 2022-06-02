@@ -13,9 +13,8 @@ bool hexLiteral = false;
 char hexString[32] = "";
 
 char *arithmaticSymbols = "+-*/%";
-char *commandSymbols = ".:,;|[]=^";
 char *hexSymbols = "0123456789abcdef-";
-char *validSymbols = "^#0123456789abcdef.:,;|[]=()+-*/%\n\t ";
+char *validSymbols = "^$#0123456789abcdef.:,;|[]=()+-*/%\n\t ";
 
 void setPosition(char cc);
 void pushHex(char cc);
@@ -27,8 +26,6 @@ int main(int argc, const char * argv[])
     struct stack *pt = newStack();
     FILE *fp;
     char cc;
-
-    size_t loop = 0;
 
     char *path = (char*)argv[1];
     if(!endsWithFileExt(path)) {
@@ -101,15 +98,12 @@ int main(int argc, const char * argv[])
         }
 
         if(cc == '[') {
-            loop ++;
             if(loopOpen(pt, fp, cc)) {
                 continue;
             }
         }
 
         if(cc == ']') {
-            loop --;
-
             do {
                 fseek(fp, -2, SEEK_CUR);
                 cc = fgetc(fp);
@@ -121,17 +115,19 @@ int main(int argc, const char * argv[])
         if(cc == '|') { reverse(pt); continue; }
         if(cc == '=') { push(pt, peek(pt)); continue;}
         if(cc == '^') { push(pt, size(pt)); continue;}
-
+        if(cc == '$') {
+            int x = pop(pt);
+            int y = pop(pt);
+            push(pt, x);
+            push(pt, y);
+            continue;
+        }
         if(cc == '.') {
-            char ci;
-            scanf("%c", &ci);
-            push(pt, (int)(ci-'0'));
+            push(pt, (int)(getchar()-'0'));
         }
 
         if(cc == ':') {
-            char ci;
-            scanf("%c", &ci);
-            push(pt, ci);
+            push(pt, getchar());
         }
 
         if(cc == ',') {
@@ -144,7 +140,6 @@ int main(int argc, const char * argv[])
         }
 
     }
-    if(loop != 0) { fprintf(stderr, "Unbalanced loops!"); exit(1); }
     fclose(fp);
 
     exit(0);
