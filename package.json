@@ -1,0 +1,52 @@
+{
+    "name": "sharp-syntax",
+    "displayName": "Sharp Syntax Support",
+    "description": "Syntax highlighting support for sharp.",
+    "version": "1.0.2",
+    "publisher": "nick-1666",
+    "license": "MIT",
+    "readme": "README.md",
+    "icon": "images/logo.png",
+    "repository": {
+        "url": "https://github.com/nick-1666/Sharp/tree/vscode-extension"
+    },
+    "galleryBanner": {
+        "color": "#242424",
+        "theme": "dark"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "keywords": [
+        "sharp",
+        "vscode",
+        "language",
+        "highlight",
+        "syntax"
+    ],
+    "engines": {
+        "vscode": "^1.6.0"
+    },
+    "contributes": {
+        "languages": [
+            {
+                "id": "sharp",
+                "aliases": [
+                    "sharp",
+                    "sharp"
+                ],
+                "extensions": [
+                    ".#"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "sharp",
+                "scopeName": "source.sharp",
+                "path": "./syntaxes/sharp.tmLanguage.json"
+            }
+        ]
+    }
+}

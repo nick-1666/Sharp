@@ -1,0 +1,40 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "scopeName": "source.sharp",
+    "name": "sharp",
+    "comment": "Syntax highlighting support for sharp.",
+    "fileTypes": [
+        "#"
+    ],
+    "patterns": [
+        {
+            "match": "\\[|\\]",
+            "name": "keyword.control.sharp"
+        },
+        {
+            "match": "\\(([A-Fa-f0-9]*)\\)",
+            "name": "storage.modifier.sharp",
+            "captures": {
+                "1": {
+                    "name": "storage.type.sharp"
+                }
+            }
+        },
+        {
+            "match": "=|\\^|\\$",
+            "name": "storage.modifier"
+        },
+        {
+            "match": "\\+|-|\\/|%",
+            "name": "keyword.operator.arithmetic.sharp"
+        },
+        {
+            "match": "\\.|,|;|:",
+            "name": "entity.name.function.io.sharp"
+        },
+        {
+            "match": "#.*",
+            "name": "comment.sharp"
+        }
+    ]
+}
